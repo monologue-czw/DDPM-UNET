@@ -1,0 +1,11 @@
+/data/code/Image-Super-Resolution-via-Iterative-Refinement/model
+├── base_model.py 
+├── ddpm_modules 
+│   ├── diffusion.py #扩散模型的具体实现（最重要的代码）
+│   └── unet.py      #(unet的具体实现）
+├── __init__.py
+├── model.py #命名为model，实际上包括了生成模型的调用、损失函数、优化器以及其他训练、采样相关的组件
+├── networks.py #unet和扩散模型的调用
+└── sr3_modules
+    ├── diffusion.py
+    └── unet.py
