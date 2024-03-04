@@ -199,3 +199,96 @@ if __name__ == '__main__':
 
     prepare(args.path, args.out, args.n_worker,
             sizes=sizes, resample=resample, lmdb_save=args.lmdb)
+
+'''该脚本出现问题，该脚本的目的是对512*512的数据集进行操作，变成输出路径下三个子文件夹，包括16*16，512*512，以及16*16插值变成512的图片，我查询一些代码修改方法，但是没有成功，报错位置始终一致（77行）'''
+'''方便复制到chatgpt，我把报错代码复制到下面
+12170/52001 images processed Process Process-1:
+Process Process-2:
+Process Process-3:
+Traceback (most recent call last):
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 536, in _save
+    fh = fp.fileno()
+         ^^^^^^^^^
+AttributeError: '_idat' object has no attribute 'fileno'
+Traceback (most recent call last):
+Traceback (most recent call last):
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 536, in _save
+    fh = fp.fileno()
+         ^^^^^^^^^
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 536, in _save
+    fh = fp.fileno()
+         ^^^^^^^^^
+AttributeError: '_idat' object has no attribute 'fileno'
+AttributeError: '_idat' object has no attribute 'fileno'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\pycharm\Image-Super-Resolution-via-Iterative-Refinement-master\Image-Super-Resolution-via-Iterative-Refinement-master\data\prepare_data.py", line 77, in prepare_process_worker
+    hr_img.save(
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\Image.py", line 2439, in save
+    save_handler(self, fp, filename)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1402, in _save
+    ImageFile._save(im, _idat(fp, chunk), [("zip", (0, 0) + im.size, 0, rawmode)])
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 540, in _save
+    _encode_tile(im, fp, tile, bufsize, None, exc)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 560, in _encode_tile
+    fp.write(data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1077, in write
+    self.chunk(self.fp, b"IDAT", data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1064, in putchunk
+    fp.write(data)
+OSError: [Errno 22] Invalid argument
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\pycharm\Image-Super-Resolution-via-Iterative-Refinement-master\Image-Super-Resolution-via-Iterative-Refinement-master\data\prepare_data.py", line 77, in prepare_process_worker
+    hr_img.save(
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\Image.py", line 2439, in save
+    save_handler(self, fp, filename)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1402, in _save
+    ImageFile._save(im, _idat(fp, chunk), [("zip", (0, 0) + im.size, 0, rawmode)])
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 540, in _save
+    _encode_tile(im, fp, tile, bufsize, None, exc)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 560, in _encode_tile
+    fp.write(data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1077, in write
+    self.chunk(self.fp, b"IDAT", data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1064, in putchunk
+    fp.write(data)
+OSError: [Errno 22] Invalid argument
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "D:\conda\envs\pytorch\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\pycharm\Image-Super-Resolution-via-Iterative-Refinement-master\Image-Super-Resolution-via-Iterative-Refinement-master\data\prepare_data.py", line 77, in prepare_process_worker
+    hr_img.save(
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\Image.py", line 2439, in save
+    save_handler(self, fp, filename)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1402, in _save
+    ImageFile._save(im, _idat(fp, chunk), [("zip", (0, 0) + im.size, 0, rawmode)])
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 540, in _save
+    _encode_tile(im, fp, tile, bufsize, None, exc)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\ImageFile.py", line 560, in _encode_tile
+    fp.write(data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1077, in write
+    self.chunk(self.fp, b"IDAT", data)
+  File "D:\conda\envs\pytorch\Lib\site-packages\PIL\PngImagePlugin.py", line 1064, in putchunk
+    fp.write(data)
+OSError: [Errno 22] Invalid argument
+12170/52001 images processed 
+进程已结束，退出代码为 0
+'''
