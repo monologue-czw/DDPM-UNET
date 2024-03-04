@@ -201,6 +201,7 @@ if __name__ == '__main__':
             sizes=sizes, resample=resample, lmdb_save=args.lmdb)
 
 '''该脚本出现问题，该脚本的目的是对512*512的数据集进行操作，变成输出路径下三个子文件夹，包括16*16，512*512，以及16*16插值变成512的图片，我查询一些代码修改方法，但是没有成功，报错位置始终一致（77行）'''
+'''尝试的方法有：1.路径修改 2.83-85行的添加 3.更新pillow等库到最新版本，仍然报错'''
 '''方便复制到chatgpt，我把报错代码复制到下面
 12170/52001 images processed Process Process-1:
 Process Process-2:
